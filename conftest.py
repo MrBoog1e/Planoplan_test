@@ -6,6 +6,7 @@ from selenium.webdriver.chrome.options import Options
 def pytest_addoption(parser):
     parser.addoption('--language', action='store', default="en", help="Choose browser language")
     parser.addoption('--browser_name', action='store', default="chrome", help="Choose browser: chrome or firefox")
+    parser.addoption('--start_maximized', action='store', default=None, help="full_size browser window")
 
 
 @pytest.fixture(scope='function')
@@ -16,6 +17,7 @@ def browser(request, browser_name=None):
     browser = None
     options = Options()
     options.add_experimental_option('prefs', {'intl.accept_languages': user_language})
+    options.add_argument('window-size=1600,1000')
     fp = webdriver.FirefoxProfile()
     fp.set_preference("intl.accept_languages", user_language)
     if browser_name == "chrome":

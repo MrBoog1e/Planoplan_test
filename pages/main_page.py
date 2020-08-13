@@ -1,41 +1,103 @@
 from .base_page import BasePage
 from selenium.webdriver.common.by import By
-
+import random
+import time
 
 class MainPage(BasePage):
     def changing_the_language_button_main_page(self):
-        button = self.browser.find_element(By.XPATH, '//*[@id="cabinet-widget"]/div/div/div/button/img')
+        button = self.browser.find_element(By.CLASS_NAME, 'current-lang-button__View-sc-1icouzm-0.bJfmgT')
         button.click()
 
     def logo_click_main_page(self):
-        button = self.browser.find_element(By.XPATH, '//*[@id="header"]/div/div/a/img')
+        button = self.browser.find_element(By.CLASS_NAME, 'newpp_header__logo-img')
         button.click()
 
     def header_rates(self):
-        button = self.browser.find_element(By.XPATH, '//*[@id="header"]/div/div/div[1]/a[1]')
+        button = self.browser.find_element(By.CSS_SELECTOR, 'a[href*="/pricing/"]')
         button.click()
 
     def header_catalog(self):
-        button = self.browser.find_element(By.XPATH, '//*[@id="header"]/div/div/div[1]/a[2]')
+        button = self.browser.find_element(By.CSS_SELECTOR, 'a[href*="/catalog/"]')
         button.click()
 
     def header_gallery(self):
-        button = self.browser.find_element(By.XPATH, '//*[@id="header"]/div/div/div[1]/a[3]')
-        button.click()
-
-    def header_login(self):
-        button = self.browser.find_element(By.XPATH, '//*[@id="cabinet-widget"]/div/a/span')
+        button = self.browser.find_element(By.CSS_SELECTOR, 'a[href*="/gallery/"]')
         button.click()
 
 
 class LoginPage(BasePage):
-    def should_be_login_form(self):
-        button = self.browser.find_element(By.XPATH, '//*[@id="cabinet-widget"]/div/a/span')
-        button.click()
-        assert self.browser.find_element(By.XPATH, '//*[@id="form-entry"]'), 'There is no login form'
 
-    def there_must_be_input_fields (self):
-        button = self.browser.find_element(By.XPATH, '//*[@id="cabinet-widget"]/div/a/span')
+    def header_login(self):
+        button = self.browser.find_element(By.CLASS_NAME, 'widget-button__ButtonText-sc-7ezmr3-4.kGpZKe')
         button.click()
-        assert self.browser.find_element(By.XPATH, '//*[@id="form-entry"]/div/form/fieldset[1]/label/div[2]/input'), 'no email field'
-        assert self.browser.find_element(By.XPATH, '//*[@id="form-entry"]/div/form/fieldset[2]/label/div[2]/input'), 'no password field'
+
+    def should_be_login_form(self):
+        assert self.browser.find_element(By.CLASS_NAME, 'modal__Container-sc-1iesfw0-2.iqMAKd'), 'There is no login ' \
+                                                                                                 'form '
+
+    def there_must_be_input_fields(self):
+        assert self.browser.find_element(By.CLASS_NAME, 'input__InputHtml-sc-185agi7-3.cDQhkj'), 'no email field '
+        assert self.browser.find_element(By.CLASS_NAME, 'input__InputHtml-sc-185agi7-3.lbGSrr'), 'no pass field '
+
+    def there_must_be_social_form(self):
+        assert self.browser.find_element(By.CLASS_NAME, 'social__ButtonsGroup-qf4lof-2.hhRsyW'), 'There is no social ' \
+                                                                                                 'form '
+
+    def there_must_be_social_form_icons(self):
+        assert self.browser.find_element(By.CSS_SELECTOR, 'img[alt="Facebook"]'), 'There is no facebook icon '
+        assert self.browser.find_element(By.CSS_SELECTOR, 'img[alt="Вконтакте"]'), 'There is no vk icon'
+
+
+class UserAuthorization(BasePage):
+    def header_login(self):
+        button = self.browser.find_element(By.CLASS_NAME, 'widget-button__ButtonText-sc-7ezmr3-4.kGpZKe')
+        button.click()
+
+    def new_user_registration(self):
+        words = ['boogie', 'dance', 'every', 'day', 'every', 'night']
+        for i in range(1):
+            arr = random.sample(words, random.randint(1, 4))
+            # select a random element from arr and append to self
+            arr.append(random.choice(words))
+            print('email=' + ''.join(arr) + '@ya.ru')
+            print('password=' + ''.join(arr))
+
+        self.browser.find_element(By.CLASS_NAME, 'link__View-sc-1ydrjtx-0.koEghb').click(), 'There is no register form '
+
+        email1 = self.browser.find_element(By.CSS_SELECTOR, 'input[name="username"]')
+        email1.send_keys(''.join(arr) + '@ya.ru')
+
+        password = self.browser.find_element(By.XPATH, '//*[@id="form-entry"]/div/form/fieldset[2]/label/div[2]/input')
+        password.send_keys(''.join(arr))
+        self.browser.find_element(By.CLASS_NAME, 'button-action__View-sc-1xgnbfo-0.cCelhz').click()
+        assert self.browser.find_element(By.CLASS_NAME, 'modal__Container-sc-1iesfw0-2.iqMAKd'), 'There is no Check ' \
+                                                                                                 'your email ' \
+                                                                                                 'form '
+
+    def user_login(self):
+        email1 = self.browser.find_element(By.CSS_SELECTOR, 'input[name="username"]')
+        email1.send_keys('mrboog1e@ya.ru')
+        password = self.browser.find_element(By.CSS_SELECTOR, 'input[autocomplete="current-password"]')
+        password.send_keys('starwars')
+        self.browser.find_element(By.CSS_SELECTOR, 'button[data-test="login_submit"]').click()
+        assert self.browser.find_element(By.CLASS_NAME, 'sidebar__InnerSidebar-r1lxuc-3.huTqPB'), 'ERROR: No sidebar'
+        assert self.browser.find_element(By.CLASS_NAME, 'page-layout__PageHeader-sc-1o3pawy-0.fGVXRJ'), 'ERROR: No ' \
+                                                                                                        'PageHeader '
+        assert self.browser.find_element(By.CLASS_NAME, 'page-layout__Content-sc-1o3pawy-5.imGmYI'), 'ERROR: No Content'
+
+    def dowload_planoplan_main_page(self):
+        button = self.browser.find_element(By.CLASS_NAME, 'downloadButton.ga-download-win')
+        button.click()
+
+    def shop_main_page(self):
+        self.browser.find_element(By.CSS_SELECTOR, 'img[class="newpp_header__logo-img"]').click()
+        self.browser.find_element(By.CLASS_NAME,
+                                  'widget-button__ButtonText-sc-7ezmr3-4.kGpZKe').click(), 'ERROR: No SHOP BUTTON'
+        self.browser.find_element(By.CSS_SELECTOR, 'button[data-test="quantity__add"]').click()
+        self.browser.find_element(By.CSS_SELECTOR, 'button[data-test="card__button-in-cart"]').click()
+        self.browser.find_element(By.CSS_SELECTOR, 'path[fill-rule="evenodd"]').click()
+        self.browser.find_element(By.CSS_SELECTOR, 'button[data-test="cart__item-remove"]').click()
+        assert self.browser.find_element(By.CSS_SELECTOR, 'div[class="cart__Text-qkkyd4-1 gqYXXX"]'), 'no message: ' \
+                                                                                                      'there are no ' \
+                                                                                                      'products In ' \
+                                                                                                      'your cart yet '
