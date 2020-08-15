@@ -1,6 +1,6 @@
 Тестирование сайта Planoplan.com
-Окружение: 1.Ubuntu: 20.04.1 LTS
-           2.Google Chrome browser: 85.0.4183.59        
+Окружение: 1. Ubuntu: 20.04.1 LTS
+           2. Google Chrome browser: 85.0.4183.59        
 Маркеры:
 * @pytest.mark.header_menu - проверка элементов заголовка;
 * @pytest.mark.login_page - проверка элементов страницы логина;
