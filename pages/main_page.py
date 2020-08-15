@@ -7,6 +7,12 @@ class MainPage(BasePage):
     def changing_the_language_button_main_page(self):
         button = self.browser.find_element(By.CLASS_NAME, 'current-lang-button__View-sc-1icouzm-0.bJfmgT')
         button.click()
+        assert self.browser.find_element(By.CSS_SELECTOR, 'img[alt="English"]'), 'English button is missing'
+        assert self.browser.find_element(By.CSS_SELECTOR, 'img[alt="Русский"]'), 'Russian button is missing'
+        assert self.browser.find_element(By.CSS_SELECTOR, 'img[alt="Deutsch"]'), 'Deutsch button is missing'
+        assert self.browser.find_element(By.CSS_SELECTOR, 'img[alt="Suomi"]'), 'Suomi button is missing'
+        assert self.browser.find_element(By.CSS_SELECTOR, 'img[alt="Português brasileiro"]'), 'Português button is ' \
+                                                                                                 'missing '
 
     def logo_click_main_page(self):
         button = self.browser.find_element(By.CLASS_NAME, 'newpp_header__logo-img')
@@ -36,8 +42,8 @@ class LoginPage(BasePage):
                                                                                                  'form '
 
     def there_must_be_input_fields(self):
-        assert self.browser.find_element(By.CLASS_NAME, 'input__InputHtml-sc-185agi7-3.cDQhkj'), 'no email field '
-        assert self.browser.find_element(By.CLASS_NAME, 'input__InputHtml-sc-185agi7-3.lbGSrr'), 'no pass field '
+        assert self.browser.find_element(By.CSS_SELECTOR, 'input[type="email"]'), 'no email field '
+        assert self.browser.find_element(By.CSS_SELECTOR, 'input[type="password"]'), 'no pass field '
 
     def there_must_be_social_form(self):
         assert self.browser.find_element(By.CLASS_NAME, 'social__ButtonsGroup-qf4lof-2.hhRsyW'), 'There is no social ' \
@@ -54,6 +60,7 @@ class UserAuthorization(BasePage):
         button.click()
 
     def new_user_registration(self):
+        global arr
         words = ['boogie', 'dance', 'every', 'day', 'every', 'night']
         for i in range(1):
             arr = random.sample(words, random.randint(1, 4))
@@ -63,11 +70,10 @@ class UserAuthorization(BasePage):
             print('password=' + ''.join(arr))
 
         self.browser.find_element(By.CLASS_NAME, 'link__View-sc-1ydrjtx-0.koEghb').click(), 'There is no register form '
-
-        email1 = self.browser.find_element(By.CSS_SELECTOR, 'input[name="username"]')
+        email1 = self.browser.find_element(By.CSS_SELECTOR, 'input[type="email"]')
         email1.send_keys(''.join(arr) + '@ya.ru')
 
-        password = self.browser.find_element(By.XPATH, '//*[@id="form-entry"]/div/form/fieldset[2]/label/div[2]/input')
+        password = self.browser.find_element(By.CSS_SELECTOR, 'input[type="password"]')
         password.send_keys(''.join(arr))
         self.browser.find_element(By.CLASS_NAME, 'button-action__View-sc-1xgnbfo-0.cCelhz').click()
         assert self.browser.find_element(By.CLASS_NAME, 'modal__Container-sc-1iesfw0-2.iqMAKd'), 'There is no Check ' \
@@ -80,6 +86,8 @@ class UserAuthorization(BasePage):
         password = self.browser.find_element(By.CSS_SELECTOR, 'input[autocomplete="current-password"]')
         password.send_keys('starwars')
         self.browser.find_element(By.CSS_SELECTOR, 'button[data-test="login_submit"]').click()
+        time.sleep(1)
+        assert "cabinet" in self.browser.current_url, "'cabinet' is not in current url. Link is not correct"
         assert self.browser.find_element(By.CLASS_NAME, 'sidebar__InnerSidebar-r1lxuc-3.huTqPB'), 'ERROR: No sidebar'
         assert self.browser.find_element(By.CLASS_NAME, 'page-layout__PageHeader-sc-1o3pawy-0.fGVXRJ'), 'ERROR: No ' \
                                                                                                         'PageHeader '
@@ -96,6 +104,9 @@ class UserAuthorization(BasePage):
         self.browser.find_element(By.CSS_SELECTOR, 'button[data-test="quantity__add"]').click()
         self.browser.find_element(By.CSS_SELECTOR, 'button[data-test="card__button-in-cart"]').click()
         self.browser.find_element(By.CSS_SELECTOR, 'path[fill-rule="evenodd"]').click()
+        basket = self.browser.find_element(By.CSS_SELECTOR, 'div[data-test="quantity__count"]')
+        print('items in the basket:', basket.text)
+        assert '2' == basket.text, 'There are more than two items in the basket'
         self.browser.find_element(By.CSS_SELECTOR, 'button[data-test="cart__item-remove"]').click()
         assert self.browser.find_element(By.CSS_SELECTOR, 'div[class="cart__Text-qkkyd4-1 gqYXXX"]'), 'no message: ' \
                                                                                                       'there are no ' \
