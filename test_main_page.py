@@ -1,7 +1,6 @@
 from .pages.main_page import MainPage, UserAuthorization
 from .pages.main_page import LoginPage
 import pytest
-import time
 link1 = "https://planoplan.com/"
 
 
@@ -69,19 +68,18 @@ class Test_new_user_functions:
         page.header_login()
         page.new_user_registration()
 
+    @pytest.mark.smoke1
     def test_login_user(self, browser):
         page = UserAuthorization(browser, link1)
         page.open()
         page.header_login()
         page.user_login()
 
-    @pytest.mark.smoke1
     def test_dowload_planoplan_main_page(self,browser):
         page = UserAuthorization(browser, link1)
         page.open()
         page.dowload_planoplan_main_page()
 
-    @pytest.mark.smoke2
     def test_shop_main_page(self, browser):
         page = UserAuthorization(browser, link1)
         page.open()
