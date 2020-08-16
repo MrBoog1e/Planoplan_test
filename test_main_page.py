@@ -31,6 +31,16 @@ class Test_header_menu:
         page.open()
         page.header_gallery()
 
+    def test_header_dowload(self, browser):
+        page = MainPage(browser, link1)
+        page.open()
+        page.header_dowload_win()
+        page.header_dowload_mac()
+
+    def test_header_menu_more(self, browser):
+        page = MainPage(browser, link1)
+        page.open()
+        page.header_menu_more()
 
 @pytest.mark.login_page
 class Test_login_page:
@@ -53,12 +63,6 @@ class Test_login_page:
         page.header_login()
         page.there_must_be_social_form()
 
-    def test_there_must_be_social_form_icons(self, browser):
-        page = LoginPage(browser, link1)
-        page.open()
-        page.header_login()
-        page.there_must_be_social_form_icons()
-
 
 @pytest.mark.smoke
 class Test_new_user_functions:
@@ -68,17 +72,11 @@ class Test_new_user_functions:
         page.header_login()
         page.new_user_registration()
 
-    @pytest.mark.smoke1
     def test_login_user(self, browser):
         page = UserAuthorization(browser, link1)
         page.open()
         page.header_login()
         page.user_login()
-
-    def test_dowload_planoplan_main_page(self,browser):
-        page = UserAuthorization(browser, link1)
-        page.open()
-        page.dowload_planoplan_main_page()
 
     def test_shop_main_page(self, browser):
         page = UserAuthorization(browser, link1)
