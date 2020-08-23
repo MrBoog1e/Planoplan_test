@@ -30,7 +30,7 @@ class Shop(BasePage):
     def performance_tariff_plan(self):
         self.browser.find_element(*ShopPageLocators.plans_button).click()
         self.browser.find_element(*ShopPageLocators.chose_plans_button).click()
-        time.sleep(1)
+        time.sleep(2)
         assert "tariff-managment" in self.browser.current_url, "'tariff-managment' is not in current url"
         tariff_name = self.browser.find_element(*ShopPageLocators.tariff_name)
         assert 'PRO' == tariff_name.text, 'The fare name does not match the one you selected'
