@@ -2,6 +2,7 @@ from .pages.main_page import MainPage, UserAuthorization
 from .pages.main_page import LoginPage
 import pytest
 link1 = "https://planoplan.com/"
+link2 = "https://mail.yandex.ru/"
 
 
 @pytest.mark.header_menu
@@ -42,6 +43,7 @@ class Test_header_menu:
         page.open()
         page.header_menu_more()
 
+
 @pytest.mark.login_page
 class Test_login_page:
     def test_should_be_login_window(self, browser):
@@ -63,24 +65,3 @@ class Test_login_page:
         page.header_login()
         page.there_must_be_social_form()
 
-
-@pytest.mark.smoke
-class Test_new_user_functions:
-    def test_new_user_registration(self, browser):
-        page = UserAuthorization(browser, link1)
-        page.open()
-        page.header_login()
-        page.new_user_registration()
-
-    def test_login_user(self, browser):
-        page = UserAuthorization(browser, link1)
-        page.open()
-        page.header_login()
-        page.user_login()
-
-    def test_shop_main_page(self, browser):
-        page = UserAuthorization(browser, link1)
-        page.open()
-        page.header_login()
-        page.user_login()
-        page.shop_main_page()
