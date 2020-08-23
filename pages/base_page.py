@@ -9,7 +9,7 @@ class BasePage:
         self.browser.get(self.url)
 
     # ожидание элемента 20 секунд
-    def __init__(self, browser, url, timeout=20):
+    def __init__(self, browser, url, timeout=30):
         self.browser = browser
         self.url = url
         self.browser.implicitly_wait(timeout)
