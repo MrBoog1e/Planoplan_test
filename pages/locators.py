@@ -38,7 +38,7 @@ class LoginPageLocators:
     icon_fb = (By.CSS_SELECTOR, 'img[alt="Вконтакте"]')
     register_button = (By.CLASS_NAME, 'link__View-sc-1ydrjtx-0.koEghb')
     activation_message = (By.CLASS_NAME, 'modal__Container-sc-1iesfw0-2.iqMAKd')
-    button_log_sign = (By.CSS_SELECTOR, 'button[data-test="button_signup"]')
+    button_log_sign = (By.CLASS_NAME, 'button-action__View-sc-1xgnbfo-0.cCelhz')
     error_email_password = (By.CSS_SELECTOR, 'div[data-test="error-message"]')
     forgot_password = (By.CSS_SELECTOR, 'button[data-test="button_forgot-pass"]')
     forgot_button = (By.CLASS_NAME, 'buttonLoader__View-hkgzw7-0.iWHvdP')
