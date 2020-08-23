@@ -65,13 +65,13 @@ class User_registration(BasePage):
             arr.append(random.choice(words))
             print('email=' + ''.join(arr) + '@ya.ru')
             print('password=' + ''.join(arr))
-
+        self.browser.find_element(*LoginPageLocators.button_log_sign).click()
         self.browser.find_element(*LoginPageLocators.register_button).click(), 'There is no register form '
         email1 = self.browser.find_element(*LoginPageLocators.input_email)
         email1.send_keys(''.join(arr) + '@ya.ru')
+        time.sleep(1)
         password = self.browser.find_element(*LoginPageLocators.input_password_new)
         password.send_keys(''.join(arr))
-        self.browser.find_element(*LoginPageLocators.button_log_sign).click()
         assert self.browser.find_element(
             *LoginPageLocators.activation_message), 'There is no Check your email form '
 
