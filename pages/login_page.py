@@ -19,7 +19,7 @@ class User_authorization(BasePage):
         password = self.browser.find_element(*LoginPageLocators.input_password)
         password.send_keys('starwars')
         self.browser.find_element(*LoginPageLocators.button_log_sign).click()
-        time.sleep(4)
+        time.sleep(5)
         assert "cabinet" in self.browser.current_url, "'cabinet' is not in current url. Link is not correct"
 
     def logins_with_invalid_data(self):
@@ -31,8 +31,8 @@ class User_authorization(BasePage):
         assert self.browser.find_element(*LoginPageLocators.error_email_password), 'The error message did not appear'
 
     def authorization_when_the_password_is_lost(self):
-        self.browser.find_element(*LoginPageLocators.forgot_password).click()
         time.sleep(2)
+        self.browser.find_element(*LoginPageLocators.forgot_password).click()
         email = self.browser.find_element(*LoginPageLocators.input_email)
         email.send_keys('dm1try.zz@yandex.ru')
         self.browser.find_element(*LoginPageLocators.forgot_button).click()
