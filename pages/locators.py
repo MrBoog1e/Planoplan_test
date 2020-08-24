@@ -59,7 +59,7 @@ class ShopPageLocators:
     panoramas_button = (By.CSS_SELECTOR, 'button[data-test="sidebar__button-PANORAMAS"]')
     widget_button = (By.CSS_SELECTOR, 'button[data-test="sidebar__button-WIDGET"]')
     plans_button = (By.CSS_SELECTOR, 'button[data-test="sidebar__button-PRICING"]')
-    #/packages
+    # /packages
     plus_button = (By.CSS_SELECTOR, 'button[data-test="quantity__add"]')
     minus_button = (By.CSS_SELECTOR, 'button[data-test="quantity__remove"]')
     add_to_card = (By.CSS_SELECTOR, 'button[data-test="card__button-in-cart"]')
@@ -67,6 +67,6 @@ class ShopPageLocators:
     basket_amount_product = (By.CSS_SELECTOR, 'div[data-test="quantity__count"]')
     remove_product = (By.CSS_SELECTOR, 'button[data-test="cart__item-remove"]')
     message_empty_bucket = (By.CSS_SELECTOR, 'div[class="cart__Text-qkkyd4-1 gqYXXX"]')
-    #/plans
+    # /plans
     chose_plans_button = (By.CSS_SELECTOR, 'a[data-test="pricing__button-upgrade"]')
     tariff_name = (By.CSS_SELECTOR, 'div[data-test="tariff_name"]')
