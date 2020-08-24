@@ -57,25 +57,28 @@ class User_registration(BasePage):
         button.click()
 
     def new_user_in_correct_registration(self):
+        time.sleep(1)
         global arr
-        words = ['boog1e', 'dance', 'every2', '2day', 'every', 'n1ght']
+        words = ['boog1e', 'dance', '3very', 'day', 'every', 'n1ght']
         for i in range(1):
-            arr = random.sample(words, random.randint(1, 4))
+            arr = random.sample(words, random.randint(1, 6))
             # select a random element from arr and append to self
             arr.append(random.choice(words))
             print('email=' + ''.join(arr) + '@ya.ru')
             print('password=' + ''.join(arr))
-        self.browser.find_element(*LoginPageLocators.register_button).click(), 'There is no register form '
-        time.sleep(1)
+        register_form = self.browser.find_element(*LoginPageLocators.register_form)
+        register_form.click()
         email1 = self.browser.find_element(*LoginPageLocators.input_email)
         email1.send_keys(''.join(arr) + '@ya.ru')
         password = self.browser.find_element(*LoginPageLocators.input_password_new)
         password.send_keys(''.join(arr))
+        register_button = self.browser.find_element(*LoginPageLocators.register_button)
+        register_button.click()
         assert self.browser.find_element(
             *LoginPageLocators.activation_message), 'There is no Check your email form '
 
     def new_user_in_incorrect_registration(self):
-        self.browser.find_element(*LoginPageLocators.register_button).click(), 'There is no register form '
+        self.browser.find_element(*LoginPageLocators.register_form).click(), 'There is no register form '
         email1 = self.browser.find_element(*LoginPageLocators.input_email)
         email1.send_keys('dmitry.z111@yandex.11')
         password = self.browser.find_element(*LoginPageLocators.input_password_new)
