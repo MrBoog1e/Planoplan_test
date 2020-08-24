@@ -27,6 +27,7 @@ UI testing of the Planoplan site
 * test_authorization_when_the_password_is_lost - VACD_003: Проверка авторизации, при утрате пароля
 * test_new_user_registration - CRNU_001: Проверка регистрации нового пользователя, с корректными данными
 * test_performance_of_the_basket - CHSW_001: Проверка работоспособности корзины магазина, с помощью добавления/удаления товара
+
 (*) -в разработке, будет дополняться.
 
 **Обновление 1.0 стабильная версия тестов**
